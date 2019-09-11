@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properties -->
+  <title>Project [#1194]</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="frap.css">
+  
+<style>
+body {
+    overflow-x:hidden;
+	overflow-y: overlay;
+	background-color: #f0f4f7;
+}
+h1 {
+	font-size: 1.6em;
+	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+h2 {
+	font-size: 1.4em;
+	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+input[type=checkbox]:checked + label.strikethrough{
+  text-decoration: line-through;
+}
+#todos{float: left;}
+#todos .card {
+	margin:10px;
+	width:200px;
+	height:40px;
+	overflow: hidden;
+	float:left;
+}
+
+.card {
+	cursor: pointer;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.nomargin{
+ margin: 0px !important;
+ border:none !important;
+}
+
+.nopadbtm {
+	padding-bottom: 0 !important;
+}
+.noborder {
+	border: none !important;
+}
+
+.nofocusborder {
+    outline: none !important;
+}
+
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);  
+  cursor: text;
+  display: block; /* For Firefox */
+}
+
+pre {
+  background:#EEE;
+  padding:5px;
+  width: 290px;
+}
+
+
+#editor {
+  min-height: 150px;
+  overflow: auto;
+  padding: 1em;
+  margin-top: 20px;
+  resize: vertical;
+  outline: none;
+}
+
+.toolbar {
+  text-align: center;
+}
+
+.toolbar a,
+.fore-wrapper,
+.back-wrapper {
+  /*border: 1px solid #AAA;*/
+  background: #FFF;
+  border-radius: 1px;
+  color: black;
+  padding: 5px;
+  width: 2.5em;
+  /*margin: -2px;*/
+  /*margin-top: 10px;*/
+  display: inline-block;
+  text-decoration: none;
+  /*box-shadow: 0px 1px 0px #CCC;*/
+}
+
+.toolbar a:hover, .fore-wrapper:hover, .back-wrapper:hover {
+  background: #f2f2f2;
+  border-color: #8c8c8c;
+}
+
+a[data-command='redo'],a[data-command='strikeThrough'],a[data-command='justifyFull'],a[data-command='insertOrderedList'],a[data-command='outdent'],a[data-command='p'],a[data-command='superscript']{
+  margin-right:5px;
+  border-radius:0 3px 3px 0;
+}
+
+a[data-command='undo'],.fore-wrapper,a[data-command='justifyLeft'],a[data-command='insertUnorderedList'],a[data-command='indent'],a[data-command='h1'],a[data-command='subscript']{
+  border-radius:3px 0 0 3px;
+}
+
+a.palette-item {
+  height: 1em;
+  border-radius: 3px;
+  margin: 2px 1px;
+  width: 1em;
+}
+
+.fore-palette,
+.back-palette {
+  display: none;  
+}
+
+.fore-wrapper,
+.back-wrapper {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.fore-wrapper:hover .fore-palette,
+.back-wrapper:hover .back-palette {
+  display: block;
+  float: left;
+  position: absolute;
+  padding: 3px;
+  width: 10em;
+  background: #FFF;
+  border: 1px solid #DDD;
+  box-shadow: 0 0 5px #CCC;
+  height: 4.4em;
+}
+
+.fore-wrapper:hover .fore-palette {
+  left: 22%;
+  top: 42px;  
+}
+
+.back-wrapper:hover .back-palette {
+  left: 25%;
+  top: 42px;
+}
+
+.fore-palette a,
+.back-palette a {
+  background: #FFF;
+  margin-bottom: 2px;
+}
+.hidden {
+	display: none;
+}
+
+</style>
+</head>
+<body>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<br/>
+	<div class="ui container "> 
+		<div class="ui stackable four column grid">
+			<div class="sixteen wide mobile eight wide tablet two wide computer column ">
+				<h4 class="ui header">
+					<i class="green sitemap icon"></i>
+					<div class="content">
+						ManoPad
+						<div class="sub header">organizer</div>
+					</div>
+				</h4>
+			</div>		
+		</div>
+	</div>
+	
+	
+	
+	<div class="ui raised padded container segment">	
+		<div class="ui nomargin">
+			<div class="ui grid">
+				<div class="column">
+					
+<h3 class="ui dividing header"><div class="ui dropdown">
+  <i class="file green icon"></i>
+  <div class="text">File</div>
+  <i class="dropdown icon"></i>
+  <div class="menu">
+    <div class="item">
+	<span class="description">ctrl + n</span>
+	New</div>
+    <div class="item">
+      <span class="description">ctrl + o</span>
+      Open...
+    </div>
+    <div class="item">
+      <span class="description">ctrl + s</span>
+      Save as...
+    </div>
+    <div class="item">
+      <span class="description">ctrl + r</span>
+      Rename
+    </div>
+    <div class="item">Make a copy</div>
+    <div class="item">
+      <i class="folder icon"></i>
+      Move to folder
+    </div>
+    <div class="item">
+      <i class="trash icon"></i>
+      Move to trash
+    </div>
+    <div class="divider"></div>
+    <div class="item">Download As...</div>
+    <div class="item">
+      <i class="dropdown icon"></i>
+      Publish To Web
+      <div class="menu">
+        <div class="item">Google Docs</div>
+        <div class="item">Google Drive</div>
+        <div class="item">Dropbox</div>
+        <div class="item">Adobe Creative Cloud</div>
+        <div class="item">Private FTP</div>
+        <div class="item">Another Service...</div>
+      </div>
+    </div>
+    <div class="item">E-mail Collaborators</div>
+  </div>
+</div></h3>
+					
+					<div id="todos" class="ui container  mobile fluid">
+						<div class="ui attached message">
+						<div class="content ">
+						  
+						  <p class="nofocusborder"><span class="ui large green text nofocusborder" placeholder="Type your title here..." tabindex="1" contenteditable="true"></span></p>
+						  
+							<div class="ui calendar" id="day_first_calendar">
+							  <div class="ui input left icon">
+								<i class="calendar icon"></i>
+								<input type="text" placeholder="Date">
+							  </div>
+							</div>							
+						</div>
+						</div>
+						<form class="ui form attached fluid segment">
+													
+							<div class="toolbar">
+							  <a href="#" data-command='undo' class="ui icon fitted"><i class='undo icon'></i></a>
+							  <a href="#" data-command='redo'><i class='repeat icon'></i></a>
+							  
+							  <a href="#" data-command='h1'>H1</a>
+							  <a href="#" data-command='h2'>H2</a>
+							  <a href="#" data-command='p'>P</a>
+							  <a href="#" data-command='bold'><i class='bold icon'></i></a>
+							  <a href="#" data-command='italic'><i class='italic icon'></i></a>
+							  <a href="#" data-command='underline'><i class='underline icon'></i></a>
+							  <a href="#" data-command='strikeThrough'><i class='strikethrough icon'></i></a>
+							  <a href="#" data-command='tasklist'><i class='tasks icon'></i></a>
+							  <a href="#" data-command='insertUnorderedList'><i class='list ul icon'></i></a>
+							  <a href="#" data-command='insertOrderedList'><i class='list ol icon'></i></a>			  
+							  
+							  <a href="#" data-command='justifyLeft'><i class='align left icon'></i></a>
+							  <a href="#" data-command='justifyCenter'><i class='align center icon'></i></a>
+							  <a href="#" data-command='justifyRight'><i class='align right icon'></i></a>
+							  <a href="#" data-command='justifyFull'><i class='align justify icon'></i></a>
+							  <a href="#" data-command='indent'><i class='indent icon'></i></a>
+							  <a href="#" data-command='outdent'><i class='outdent icon'></i></a>							  
+							  
+							  <a href="#" data-command='createlink'><i class='linkify  icon'></i></a>
+							  <a href="#" data-command='unlink'><i class='unlink icon'></i></a>
+							  <a href="#" data-command='insertimage'><i class='image icon'></i></a>
+							</div>
+							<div id="editor" contenteditable="true" tabindex="2">
+							
+							</div>
+							<div class="wrapper hidden">
+								<div id="actionitems" class="content ui list">
+									<h4 class="ui sub header" style="margin: 0.5em 0;">Action items</h4>	
+								</div>
+								<div class="ui fluid action input">
+								  <input type="text" class="newtask" placeholder="Add new task...">
+								  <button class="ui icon button addnewai">
+									<i class="add icon"></i>
+								  </button>
+								</div>		
+							</div>
+						</form>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+	function getSelectedText() {
+        if (window.getSelection) {
+            return window.getSelection().toString();
+        } else if (document.selection) {
+            return document.selection.createRange().text;
+        }
+        return '';
+    };
+	
+	$('.ui.dropdown').dropdown();
+	$('#day_first_calendar')
+  .calendar({
+    type: 'date',
+    monthFirst: false,
+	initialDate: new Date(),
+  });
+  
+  $('.addnewai').click(function() {
+	let input = $(this).parent().find('input');
+	
+	if(input.val().length > 3 ) {
+		$(this).parent().parent().parent().find('#actionitems').append('<div class="ui item checkbox"><input type="checkbox"  class="hidden"><label class="strikethrough">'+input.val()+'</label></div>');
+		$('.checkbox').checkbox();
+		input.parent().removeClass('error');
+		input.val('');
+	} else {
+		input.parent().addClass('error');
+		console.log('validation');
+	}
+});
+  
+  
+  function replaceSelectedText(replacementText) {
+    var sel, range;
+    if (window.getSelection) {
+        sel = window.getSelection();
+        if (sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            range.deleteContents();
+			let el = document.createElement("b");
+			el.innerHTML = replacementText;
+            range.insertNode(el);
+        }
+    } else if (document.selection && document.selection.createRange) {
+        range = document.selection.createRange();
+        range.text = replacementText;
+    }
+}
+	$('.toolbar a').click(function(e) {
+	  var command = $(this).data('command');
+	  if(command == 'tasklist') {
+		//$('#editor').append('<div class="ui checkbox" ><input type="checkbox" ><label class="strikethrough" contenteditable>Item text</label></div>');
+		$('.wrapper').toggleClass('hidden');
+	  }
+	  if (command == 'h1' || command == 'h2' || command == 'p') {
+		document.execCommand('formatBlock', false, command);
+	  }	 
+	  
+		if (command == 'createlink' || command == 'insertimage') {
+	  url = prompt('Enter the link here: ','http:\/\/'); document.execCommand($(this).data('command'), false, url);
+	  }
+	  else document.execCommand($(this).data('command'), false, null);
+	});
+
+    
+</script>
