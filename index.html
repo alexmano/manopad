@@ -5,381 +5,273 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-  <!-- Site Properties -->
-  <title>Project [#1194]</title>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.css">
-  <link rel="stylesheet" type="text/css" href="frap.css">
+  <style>
+	body{background-color: #f0f4f7 !important;}
+	input[type=checkbox]:checked + label.strikethrough{
+		text-decoration: line-through;
+	}
+	.mark {
+		cursor: pointer !important;
+	}
+	.hidden {
+		visibility: hidden !important;
+	}
+	.nodisplay {
+		display: none !important;
+	}
+  </style>
   
-<style>
-body {
-    overflow-x:hidden;
-	overflow-y: overlay;
-	background-color: #f0f4f7;
-}
-h1 {
-	font-size: 1.6em;
-	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
-}
-h2 {
-	font-size: 1.4em;
-	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
-}
-input[type=checkbox]:checked + label.strikethrough{
-  text-decoration: line-through;
-}
-#todos{float: left;}
-#todos .card {
-	margin:10px;
-	width:200px;
-	height:40px;
-	overflow: hidden;
-	float:left;
-}
-
-.card {
-	cursor: pointer;
-}
-.noselect {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.nomargin{
- margin: 0px !important;
- border:none !important;
-}
-
-.nopadbtm {
-	padding-bottom: 0 !important;
-}
-.noborder {
-	border: none !important;
-}
-
-.nofocusborder {
-    outline: none !important;
-}
-
-[contenteditable=true]:empty:before{
-  content: attr(placeholder);  
-  cursor: text;
-  display: block; /* For Firefox */
-}
-
-pre {
-  background:#EEE;
-  padding:5px;
-  width: 290px;
-}
-
-
-#editor {
-  min-height: 150px;
-  overflow: auto;
-  padding: 1em;
-  margin-top: 20px;
-  resize: vertical;
-  outline: none;
-}
-
-.toolbar {
-  text-align: center;
-}
-
-.toolbar a,
-.fore-wrapper,
-.back-wrapper {
-  /*border: 1px solid #AAA;*/
-  background: #FFF;
-  border-radius: 1px;
-  color: black;
-  padding: 5px;
-  width: 2.5em;
-  /*margin: -2px;*/
-  /*margin-top: 10px;*/
-  display: inline-block;
-  text-decoration: none;
-  /*box-shadow: 0px 1px 0px #CCC;*/
-}
-
-.toolbar a:hover, .fore-wrapper:hover, .back-wrapper:hover {
-  background: #f2f2f2;
-  border-color: #8c8c8c;
-}
-
-a[data-command='redo'],a[data-command='strikeThrough'],a[data-command='justifyFull'],a[data-command='insertOrderedList'],a[data-command='outdent'],a[data-command='p'],a[data-command='superscript']{
-  margin-right:5px;
-  border-radius:0 3px 3px 0;
-}
-
-a[data-command='undo'],.fore-wrapper,a[data-command='justifyLeft'],a[data-command='insertUnorderedList'],a[data-command='indent'],a[data-command='h1'],a[data-command='subscript']{
-  border-radius:3px 0 0 3px;
-}
-
-a.palette-item {
-  height: 1em;
-  border-radius: 3px;
-  margin: 2px 1px;
-  width: 1em;
-}
-
-.fore-palette,
-.back-palette {
-  display: none;  
-}
-
-.fore-wrapper,
-.back-wrapper {
-  display: inline-block;
-  cursor: pointer;
-}
-
-.fore-wrapper:hover .fore-palette,
-.back-wrapper:hover .back-palette {
-  display: block;
-  float: left;
-  position: absolute;
-  padding: 3px;
-  width: 10em;
-  background: #FFF;
-  border: 1px solid #DDD;
-  box-shadow: 0 0 5px #CCC;
-  height: 4.4em;
-}
-
-.fore-wrapper:hover .fore-palette {
-  left: 22%;
-  top: 42px;  
-}
-
-.back-wrapper:hover .back-palette {
-  left: 25%;
-  top: 42px;
-}
-
-.fore-palette a,
-.back-palette a {
-  background: #FFF;
-  margin-bottom: 2px;
-}
-.hidden {
-	display: none;
-}
-
-</style>
-</head>
-<body>
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-	<br/>
-	<div class="ui container "> 
-		<div class="ui stackable four column grid">
-			<div class="sixteen wide mobile eight wide tablet two wide computer column ">
-				<h4 class="ui header">
-					<i class="green sitemap icon"></i>
-					<div class="content">
-						ManoPad
-						<div class="sub header">organizer</div>
-					</div>
-				</h4>
-			</div>		
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="frap.css">
+ <body>
+ 
+ <script src='https://bevacqua.github.io/dragula/dist/dragula.js'></script>
+ 		<div class="ui raised  text container segment"> 
+			<div class="ui stackable four column grid">
+				<div class="sixteen wide mobile eight wide tablet two wide computer column">
+					<h4 class="ui header">
+						<i class="black sitemap link icon"></i>
+						<div class="content">
+							<a href="#" class="ui black text">ManoPad
+							<div class="sub header">organizer</div>
+							</a>						
+						</div>
+					</h4>
+				</div>
+		</div>		
 		</div>
-	</div>
-	
-	
-	
-	<div class="ui raised padded container segment">	
-		<div class="ui nomargin">
-			<div class="ui grid">
-				<div class="column">
-					
-<h3 class="ui dividing header"><div class="ui dropdown">
-  <i class="file green icon"></i>
-  <div class="text">File</div>
-  <i class="dropdown icon"></i>
-  <div class="menu">
-    <div class="item">
-	<span class="description">ctrl + n</span>
-	New</div>
-    <div class="item">
-      <span class="description">ctrl + o</span>
-      Open...
-    </div>
-    <div class="item">
-      <span class="description">ctrl + s</span>
-      Save as...
-    </div>
-    <div class="item">
-      <span class="description">ctrl + r</span>
-      Rename
-    </div>
-    <div class="item">Make a copy</div>
-    <div class="item">
-      <i class="folder icon"></i>
-      Move to folder
-    </div>
-    <div class="item">
-      <i class="trash icon"></i>
-      Move to trash
-    </div>
-    <div class="divider"></div>
-    <div class="item">Download As...</div>
-    <div class="item">
-      <i class="dropdown icon"></i>
-      Publish To Web
-      <div class="menu">
-        <div class="item">Google Docs</div>
-        <div class="item">Google Drive</div>
-        <div class="item">Dropbox</div>
-        <div class="item">Adobe Creative Cloud</div>
-        <div class="item">Private FTP</div>
-        <div class="item">Another Service...</div>
-      </div>
-    </div>
-    <div class="item">E-mail Collaborators</div>
-  </div>
-</div></h3>
-					
-					<div id="todos" class="ui container  mobile fluid">
-						<div class="ui attached message">
-						<div class="content ">
-						  
-						  <p class="nofocusborder"><span class="ui large green text nofocusborder" placeholder="Type your title here..." tabindex="1" contenteditable="true"></span></p>
-						  
-							<div class="ui calendar" id="day_first_calendar">
-							  <div class="ui input left icon">
-								<i class="calendar icon"></i>
-								<input type="text" placeholder="Date">
-							  </div>
-							</div>							
-						</div>
-						</div>
-						<form class="ui form attached fluid segment">
-													
-							<div class="toolbar">
-							  <a href="#" data-command='undo' class="ui icon fitted"><i class='undo icon'></i></a>
-							  <a href="#" data-command='redo'><i class='repeat icon'></i></a>
-							  
-							  <a href="#" data-command='h1'>H1</a>
-							  <a href="#" data-command='h2'>H2</a>
-							  <a href="#" data-command='p'>P</a>
-							  <a href="#" data-command='bold'><i class='bold icon'></i></a>
-							  <a href="#" data-command='italic'><i class='italic icon'></i></a>
-							  <a href="#" data-command='underline'><i class='underline icon'></i></a>
-							  <a href="#" data-command='strikeThrough'><i class='strikethrough icon'></i></a>
-							  <a href="#" data-command='tasklist'><i class='tasks icon'></i></a>
-							  <a href="#" data-command='insertUnorderedList'><i class='list ul icon'></i></a>
-							  <a href="#" data-command='insertOrderedList'><i class='list ol icon'></i></a>			  
-							  
-							  <a href="#" data-command='justifyLeft'><i class='align left icon'></i></a>
-							  <a href="#" data-command='justifyCenter'><i class='align center icon'></i></a>
-							  <a href="#" data-command='justifyRight'><i class='align right icon'></i></a>
-							  <a href="#" data-command='justifyFull'><i class='align justify icon'></i></a>
-							  <a href="#" data-command='indent'><i class='indent icon'></i></a>
-							  <a href="#" data-command='outdent'><i class='outdent icon'></i></a>							  
-							  
-							  <a href="#" data-command='createlink'><i class='linkify  icon'></i></a>
-							  <a href="#" data-command='unlink'><i class='unlink icon'></i></a>
-							  <a href="#" data-command='insertimage'><i class='image icon'></i></a>
-							</div>
-							<div id="editor" contenteditable="true" tabindex="2">
+ <div class="ui raised  text container segment">
+ <div class="column">
+
+					<div id="todos" class="ui container mobile ">					
+							<div id="notask"class="ui placeholder segment">
 							
+							  <div class="ui icon header">
+								<i class="tasks icon"></i>
+								<p class="ui text gray">The tasks list is empty. </p>
+							  </div>							  
 							</div>
-							<div class="wrapper hidden">
-								<div id="actionitems" class="content ui list">
-									<h4 class="ui sub header" style="margin: 0.5em 0;">Action items</h4>	
-								</div>
-								<div class="ui fluid action input">
+							<div id="left-lovehandles" class="container">
+							</div>
+							<div class="ui divider"></div>
+							<div class="ui fluid action input">
 								  <input type="text" class="newtask" placeholder="Add new task...">
 								  <button class="ui icon button addnewai">
 									<i class="add icon"></i>
 								  </button>
-								</div>		
-							</div>
-						</form>
-						
+								</div>					
+						</div>
+						</div>
 					</div>
-					
 				</div>
 			</div>
-		</div>
+						
+
+<div  id="configtask" class="ui modal tiny very light ">
+  <div class="header">
+    Configure item
+  </div>
+  <div class="content">
+	<div class="ui fluid right action left icon input">
+  <i class="clipboard outline icon"></i>  
+  <input type="text" placeholder="Enter item title">
+  <div class="ui basic floating dropdown button">
+    <div class="text">Item Type</div>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="item active selected"><i class="calendar check outline icon"></i> Task</div>
+      <div class="item"><i class="tasks icon"></i> Multiple tasks</div>
+      <div class="item"><i class="bell outline icon"></i> Reminder</div>
+      <div class="item"><i class="file alternate outline icon"></i> Note</div>
+    </div>
+  </div>
+</div>
+
+<div class="ui divider"></div>
+
+<div class="ui fluid form">
+	<div class="ui left icon fluid input">
+        <textarea rows="2" style="margin-top: 0px; margin-bottom: 0px; min-width:280px; overflow:hidden;min-height:40px;" placeholder="Enter item description"></textarea>
+        <i class="hashtag icon"></i>
+    </div>
+</div>
+
+<div class="ui divider"></div>
+
+<div id="actionitems" class="content ui list">
+<h4 class="ui sub header" style="margin: 0.5em 0;">Action items</h4>	
+</div>
+<div class="ui fluid action input">
+  <input type="text" class="newtask" placeholder="Add new task...">
+  <button class="ui icon button addnewai">
+	<i class="add icon"></i>
+  </button>
+</div>
+
+<div class="ui divider"></div>
+<h4 class="ui sub header" style="margin: 0.5em 0;">Estimated item</h4>	
+<div class="ui form">
+  <div class="two fields">
+    <div class="field">
+      <label>Start date</label>
+      <div class="ui calendar" id="rangestart">
+        <div class="ui input left icon">
+          <i class="calendar icon"></i>
+          <input type="text" placeholder="Start">
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>End date</label>
+      <div class="ui calendar" id="rangeend">
+        <div class="ui input left icon">
+          <i class="calendar icon"></i>
+          <input type="text" placeholder="End">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="ui divider"></div>
+
+
+<div class="ui floating fluid inversed labeled icon dropdown button">
+  <i class="add user icon"></i>
+  <span class="text">Assign to a user</span>
+  <div class="menu">
+    <div class="header">
+      People You Might Know
+    </div>
+    <div class="item">
+      <i class="user icon"></i>
+      Jenny Hess
+    </div>
+    <div class="item">
+      <i class="user icon"></i>
+      Elliot Fu
+    </div>
+    <div class="item">
+      <i class="user icon"></i>
+      Stevie Feliciano
+    </div>
+    <div class="header">
+      Your Friends' Friends
+    </div>
+    <div class="item">
+      <i class="user icon"></i>
+      Christian
+    </div>
+    <div class="item">
+      <i class="user icon"></i>
+      Matt
+    </div>
+    <div class="item">
+      <i class="user icon"></i>
+      Justen Kitsune
+    </div>
+  </div>
+</div>
+
+<div class="ui divider"></div>
+<div class="ui fluid multiple search selection dropdown">
+  <input type="hidden" name="country">
+  <i class="dropdown icon"></i>
+	<div class="default text">Sharing with</div>
+  <div class="menu">
+	  <div class="item" data-value="ev"><i class="user friends icon"></i>Everyone</div>
+	  <div class="item" data-value="af"><i class="user icon"></i>Justin</div>
+	  <div class="item" data-value="ax"><i class="user icon"></i>Alan</div>
+  </div>
 	</div>
-	
-	
+	<div class="ui divider"></div>	
+  
+  <div class="actions">
+    <div class="ui button">Cancel</div>
+    <div class="ui button ok">OK</div>
+  </div>
+</div>
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+ <script type="text/javascript">
+ dragula([document.getElementById('left-lovehandles')], {
+  moves: function (el, container, handle) {
+    return handle.classList.contains('handle');
+  }
+});
 
-<script type="text/javascript">
-	function getSelectedText() {
-        if (window.getSelection) {
-            return window.getSelection().toString();
-        } else if (document.selection) {
-            return document.selection.createRange().text;
-        }
-        return '';
-    };
-	
-	$('.ui.dropdown').dropdown();
-	$('#day_first_calendar')
-  .calendar({
-    type: 'date',
-    monthFirst: false,
-	initialDate: new Date(),
-  });
-  
-  $('.addnewai').click(function() {
+// *** For existing task items
+$('.taskitem').hover(
+	function() {$(this).children('.icon').removeClass('hidden');},
+	function() {$(this).children('.icon').addClass('hidden');});
+var _toDoIndex = 1;
+
+// *** Add new task
+$('.addnewai').click(function() {
 	let input = $(this).parent().find('input');
 	
 	if(input.val().length > 3 ) {
-		$(this).parent().parent().parent().find('#actionitems').append('<div class="ui item checkbox"><input type="checkbox"  class="hidden"><label class="strikethrough">'+input.val()+'</label></div>');
-		$('.checkbox').checkbox();
+		$(this).parent().parent().parent().find('#left-lovehandles').append('<div class="taskitem"><i class="hamburger icon handle link hidden"></i> <i class="right link close icon hidden"></i> <i class="right link edit icon configaction hidden"></i><div class="ui checkbox"><input type="checkbox" name="example" id="todo_'+_toDoIndex+'"><label for="todo_'+_toDoIndex+'" class="strikethrough mark">'+input.val()+'</label></div></div>');
 		input.parent().removeClass('error');
 		input.val('');
+		_toDoIndex++;
 	} else {
 		input.parent().addClass('error');
 		console.log('validation');
 	}
-});
-  
-  
-  function replaceSelectedText(replacementText) {
-    var sel, range;
-    if (window.getSelection) {
-        sel = window.getSelection();
-        if (sel.rangeCount) {
-            range = sel.getRangeAt(0);
-            range.deleteContents();
-			let el = document.createElement("b");
-			el.innerHTML = replacementText;
-            range.insertNode(el);
-        }
-    } else if (document.selection && document.selection.createRange) {
-        range = document.selection.createRange();
-        range.text = replacementText;
-    }
-}
-	$('.toolbar a').click(function(e) {
-	  var command = $(this).data('command');
-	  if(command == 'tasklist') {
-		//$('#editor').append('<div class="ui checkbox" ><input type="checkbox" ><label class="strikethrough" contenteditable>Item text</label></div>');
-		$('.wrapper').toggleClass('hidden');
-	  }
-	  if (command == 'h1' || command == 'h2' || command == 'p') {
-		document.execCommand('formatBlock', false, command);
-	  }	 
-	  
-		if (command == 'createlink' || command == 'insertimage') {
-	  url = prompt('Enter the link here: ','http:\/\/'); document.execCommand($(this).data('command'), false, url);
-	  }
-	  else document.execCommand($(this).data('command'), false, null);
+	$('.taskitem').hover(
+	function() {$(this).children('.icon').removeClass('hidden');},
+	function() {$(this).children('.icon').addClass('hidden');});
+	
+	$('.configaction').click(function(evt) {
+		$('#configtask')
+		  .modal({inverted: true, closable: false}) 
+		  .modal('show')
+		;
+		
+		$('#rangestart').calendar({
+		  type: 'date',
+		  monthFirst: false,
+		  endCalendar: $('#rangeend')
+		});
+		$('#rangeend').calendar({
+		  type: 'date',
+		  monthFirst: false,
+		  startCalendar: $('#rangestart')
+		});
+		$('.ok').click(function() {
+		$('body')
+		  .toast({
+			title: 'Success',
+			message: 'Item saved successfully',
+			position: 'top center',
+			showIcon: 'thumbs up outline',
+			class: 'success',
+			className: {
+				toast: 'ui hoverfloating message'
+			},
+			showProgress: 'bottom'
+		  });
+		});
+		$('.dropdown').dropdown();
 	});
+});
 
-    
+// *** Add new task by ENTER key
+$('.newtask').keypress(function( event ) {
+  if ( event.which == 13 ) {
+     $(this).parent().find('.addnewai').click();
+  }
+});
+
+
+
+
+
+
 </script>
